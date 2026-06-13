@@ -1,0 +1,13 @@
+.env
+config.json
+history.json
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+recordings/
+test_loopback.wav
+.claude/
+*.spec
+build/
+dist/
