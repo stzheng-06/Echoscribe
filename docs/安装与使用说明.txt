@@ -1,0 +1,92 @@
+EchoScribe Windows 便携版——安装与首次使用说明
+更新时间：2026-08-05
+
+一、系统要求
+
+1. Windows 10 或 Windows 11，64 位系统。
+2. 使用转录、摘要和翻译功能时需要互联网连接及兼容的 API 密钥。
+3. 本程序不需要安装 Python，也不包含本地语音模型、PyTorch 或 CUDA。
+
+二、安装与启动
+
+1. 将收到的 ZIP 压缩包完整解压到一个普通文件夹，例如：
+   C:\Programs\EchoScribe
+2. 不要直接在 ZIP 压缩包预览窗口内运行程序。
+3. 双击 EchoScribe.exe 启动。
+4. 本发布版未购买代码签名证书。如果 Windows SmartScreen 显示保护提示，请先确认
+   文件来自可信发送者，再选择“更多信息”→“仍要运行”。
+5. 可以右键 EchoScribe.exe，选择“发送到”→“桌面快捷方式”。
+
+三、首次配置
+
+1. 启动后打开左侧“设置”。
+2. 填写 API Key。密钥只保存在当前 Windows 用户的本地配置中。
+3. 默认 API 地址为：https://aihubmix.com/v1
+4. 转录模型可使用：
+   - gpt-4o-transcribe-diarize
+   - whisper-large-v3
+5. 摘要与翻译模型默认使用：gpt-4o-mini
+6. 根据需要选择界面语言、摘要语言和工作区位置，然后保存。
+
+四、基本使用流程
+
+1. 点击“导入音频”，或使用“捕获电脑音频”。
+2. 选择转录模型、转录语言和工作模式。
+3. 点击“开始转录”。转录完成后，“生成摘要”按钮会自动启用。
+4. 如需翻译，在转录或摘要面板中选择 English、简体中文或 Español，
+   再点击“翻译转录文本”或“翻译摘要”。
+5. “历史”页面可搜索、播放、重新转录、重新生成摘要或移至回收站。
+
+五、导出内容
+
+1. 转录面板中的“导出当前版本”保存 UTF-8 编码的 .txt 文件。
+2. 摘要面板中的“导出当前版本”保存 UTF-8 编码的 .md 文件。
+3. 语言选择为“原文”时导出原文；选择已有翻译时导出该翻译版本。
+4. 保存窗口会让你选择目标目录，程序不会自动覆盖其他文件。
+
+六、长音频与 FFmpeg
+
+1. 超过兼容模型单次时长限制的音频会被分段处理。
+2. 电脑录制的 WAV 文件无需额外工具即可分段。
+3. 较长的 MP3、M4A、MP4、WebM、OGG 或 FLAC 文件可能需要安装 FFmpeg，
+   并将 ffmpeg.exe 所在目录加入 Windows PATH。
+4. 如果提示找不到 FFmpeg，请安装后完全退出并重新启动 EchoScribe。
+
+七、数据位置与隐私
+
+默认配置、日志和历史数据位于：
+%APPDATA%\EchoScribe
+
+默认工作区位于：
+%APPDATA%\EchoScribe\workspace
+
+导入的音频会复制到工作区。转录时，所选音频会发送到你配置的 API 服务商；
+程序不会自动上传未开始转录的文件。请不要向他人发送包含 API Key 的配置文件。
+
+八、升级与卸载
+
+升级：
+1. 完全退出 EchoScribe。
+2. 用新版 EchoScribe.exe 替换旧版。
+3. 配置和历史数据保存在 %APPDATA% 中，不会因替换 EXE 而丢失。
+
+卸载：
+1. 完全退出 EchoScribe。
+2. 删除 EchoScribe.exe 和本说明文件。
+3. 如需同时删除配置、日志、历史和复制的音频，请先备份需要保留的内容，
+   再手动删除 %APPDATA%\EchoScribe。此操作不可恢复。
+
+九、常见问题
+
+1. 转录请求返回 400：确认所选模型受 API 服务商支持。AiHubMix 的
+   whisper-large-v3 不使用 diarized_json 或 chunking_strategy 参数。
+2. 无法移动到回收站：先停止播放并稍候；当前版本会自动释放文件并重试。
+3. 长 MP3 转录失败：确认 FFmpeg 已安装并加入 PATH。
+4. 程序异常退出：查看日志文件：
+   %APPDATA%\EchoScribe\logs\echoscribe.log
+5. API Key 无效或余额不足：登录 API 服务商后台检查密钥、额度和模型权限。
+
+十、分享前检查
+
+发布包只应包含 EchoScribe.exe 和本说明文件。不要加入 .env、config.json、
+工作区、录音、日志或任何 API Key。

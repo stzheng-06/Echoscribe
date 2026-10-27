@@ -1,0 +1,113 @@
+EchoScribe para Windows — Guía de instalación y primer uso
+Actualización: 2026-08-05
+
+1. Requisitos del sistema
+
+1. Windows 10 o Windows 11 de 64 bits.
+2. Las funciones de transcripción, resumen y traducción requieren conexión a
+   Internet y una clave de una API compatible.
+3. No es necesario instalar Python. El programa no incluye modelos de voz
+   locales, PyTorch ni CUDA.
+
+2. Instalación e inicio
+
+1. Extrae todos los archivos recibidos en una carpeta normal, por ejemplo:
+   C:\Programs\EchoScribe
+2. No ejecutes el programa directamente desde la vista previa de un ZIP.
+3. Haz doble clic en EchoScribe.exe.
+4. Esta versión no tiene un certificado de firma de código. Si Windows
+   SmartScreen muestra una advertencia, comprueba primero que el archivo proviene
+   de una persona de confianza y después selecciona «Más información» →
+   «Ejecutar de todas formas».
+5. Para crear un acceso directo, haz clic derecho en EchoScribe.exe y selecciona
+   «Enviar a» → «Escritorio (crear acceso directo)».
+
+3. Configuración inicial
+
+1. Abre «Configuración» en la barra lateral.
+2. Introduce la clave API. La clave se guarda únicamente en la configuración
+   local del usuario actual de Windows.
+3. La URL de API predeterminada es: https://aihubmix.com/v1
+4. Puedes utilizar uno de estos modelos de transcripción:
+   - gpt-4o-transcribe-diarize
+   - whisper-large-v3
+5. El modelo predeterminado para resúmenes y traducciones es: gpt-4o-mini
+6. Selecciona el idioma de la interfaz, el idioma del resumen y la ubicación del
+   espacio de trabajo. Después, guarda la configuración.
+
+4. Flujo de uso básico
+
+1. Selecciona «Importar audio» o utiliza «Capturar audio del PC».
+2. Elige el modelo, el idioma de transcripción y el modo de trabajo.
+3. Selecciona «Transcribir». Al terminar, se habilitará «Generar resumen».
+4. Para traducir, elige English, 简体中文 o Español en el panel de transcripción
+   o resumen. Después selecciona «Traducir transcripción» o «Traducir resumen».
+5. La página «Historial» permite buscar, reproducir, volver a transcribir,
+   regenerar resúmenes y mover registros a la papelera.
+
+5. Exportación
+
+1. «Exportar versión actual» en el panel de transcripción guarda un archivo .txt
+   con codificación UTF-8.
+2. «Exportar versión actual» en el panel de resumen guarda un archivo .md con
+   codificación UTF-8.
+3. Si está seleccionado «Original», se exporta el original. Si seleccionas una
+   traducción existente, se exporta esa versión traducida.
+4. La ventana de guardado permite elegir la carpeta de destino. El programa no
+   sobrescribe otros archivos automáticamente.
+
+6. Audios largos y FFmpeg
+
+1. Los audios que superen el límite del modelo compatible se procesan por partes.
+2. Los WAV capturados desde el PC pueden dividirse sin herramientas adicionales.
+3. Los archivos MP3, M4A, MP4, WebM, OGG o FLAC largos pueden requerir FFmpeg.
+   Instala FFmpeg y añade la carpeta que contiene ffmpeg.exe al PATH de Windows.
+4. Si EchoScribe indica que no encuentra FFmpeg, cierra completamente el programa
+   y vuelve a abrirlo después de actualizar el PATH.
+
+7. Ubicación de datos y privacidad
+
+La configuración, los registros y el historial se guardan por defecto en:
+%APPDATA%\EchoScribe
+
+El espacio de trabajo predeterminado se encuentra en:
+%APPDATA%\EchoScribe\workspace
+
+El audio importado se copia al espacio de trabajo. Al iniciar una transcripción,
+el audio seleccionado se envía al proveedor de API configurado. Los archivos que
+no se transcriben no se suben automáticamente. No compartas archivos de
+configuración que contengan una clave API.
+
+8. Actualización y desinstalación
+
+Para actualizar:
+1. Cierra EchoScribe completamente.
+2. Sustituye EchoScribe.exe por la versión nueva.
+3. La configuración y el historial permanecen en %APPDATA% y no se eliminan al
+   sustituir el ejecutable.
+
+Para desinstalar:
+1. Cierra EchoScribe completamente.
+2. Elimina EchoScribe.exe y los archivos de instrucciones.
+3. Para borrar también la configuración, los registros, el historial y las copias
+   de audio, haz primero una copia de seguridad de lo que desees conservar y
+   elimina manualmente %APPDATA%\EchoScribe. Esta acción no se puede deshacer.
+
+9. Problemas frecuentes
+
+1. La API devuelve un error 400: comprueba que el proveedor admita el modelo
+   seleccionado. Con AiHubMix, whisper-large-v3 no utiliza los parámetros
+   diarized_json ni chunking_strategy.
+2. No se puede mover un registro a la papelera: detén la reproducción y espera un
+   momento. Esta versión libera el archivo y vuelve a intentar la operación.
+3. Falla la transcripción de un MP3 largo: comprueba que FFmpeg esté instalado y
+   disponible en PATH.
+4. El programa se cierra de forma inesperada: revisa el archivo de registro:
+   %APPDATA%\EchoScribe\logs\echoscribe.log
+5. Clave API no válida o saldo insuficiente: revisa la clave, el saldo y los
+   permisos del modelo en el panel del proveedor.
+
+10. Comprobación antes de compartir
+
+La carpeta de distribución debe incluir EchoScribe.exe y las guías de uso. No
+incluyas .env, config.json, el espacio de trabajo, audios, registros ni claves API.

@@ -1,7 +1,6 @@
-PySide6>=6.6.0
-requests>=2.31.0
-sounddevice>=0.4.70
-numpy>=1.26.0
-soundfile>=0.12.1
-PyAudioWPatch>=0.2.12
-scipy>=1.12.0
+PySide6
+openai
+pydantic
+mutagen
+PyAudioWPatch
+pytest
